@@ -1,4 +1,4 @@
-package dev.zap.JobPortal.registration;
+package dev.zap.JobPortalLogin.registration;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

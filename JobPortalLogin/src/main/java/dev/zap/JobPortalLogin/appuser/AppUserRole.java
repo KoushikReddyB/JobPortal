@@ -1,4 +1,4 @@
-package dev.zap.JobPortal.appuser;
+package dev.zap.JobPortalLogin.appuser;
 
 public enum AppUserRole {
 	USER,

@@ -1,4 +1,4 @@
-package dev.zap.JobPortal.security;
+package dev.zap.JobPortalLogin.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

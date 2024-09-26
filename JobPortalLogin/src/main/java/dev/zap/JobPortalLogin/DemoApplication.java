@@ -1,4 +1,4 @@
-package dev.zap.JobPortal;
+package dev.zap.JobPortalLogin;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

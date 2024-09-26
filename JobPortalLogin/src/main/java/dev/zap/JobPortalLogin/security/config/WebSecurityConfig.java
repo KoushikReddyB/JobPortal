@@ -1,4 +1,4 @@
-package dev.zap.JobPortal.security.config;
+package dev.zap.JobPortalLogin.security.config;
 
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import dev.zap.JobPortal.appuser.AppUserService;
+import dev.zap.JobPortalLogin.appuser.AppUserService;
 
 @Configuration
 @AllArgsConstructor
