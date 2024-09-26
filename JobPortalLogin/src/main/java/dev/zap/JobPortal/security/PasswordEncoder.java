@@ -1,4 +1,4 @@
-package dev.zap.JobPortal.security.config;
+package dev.zap.JobPortal.security;
 
 public class PasswordEncoder {
 
