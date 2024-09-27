@@ -1,7 +1,7 @@
 package dev.zap.JobPortalLogin.appuser;
 
-import com.example.demo.registration.token.ConfirmationToken;
-import com.example.demo.registration.token.ConfirmationTokenService;
+import dev.zap.JobPortalLogin.registration.token.ConfirmationToken;
+import dev.zap.JobPortalLogin.registration.token.ConfirmationTokenService;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

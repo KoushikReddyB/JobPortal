@@ -7,6 +7,10 @@ import org.springframework.stereotype.Service;
 import dev.zap.JobPortalLogin.appuser.AppUser;
 import dev.zap.JobPortalLogin.appuser.AppUserRole;
 import dev.zap.JobPortalLogin.appuser.AppUserService;
+import dev.zap.JobPortalLogin.email.EmailSender;
+import dev.zap.JobPortalLogin.registration.token.ConfirmationToken;
+import dev.zap.JobPortalLogin.registration.token.ConfirmationTokenService;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -20,9 +24,11 @@ public class RegistrationService {
 
 	
     // Manual constructor for dependency injection without AllArgsConstructor
-	 public RegistrationService(AppUserService appUserService, EmailValidator emailValidator) {
+	 public RegistrationService(AppUserService appUserService, EmailValidator emailValidator, ConfirmationTokenService confirmationTokenService, EmailSender emailSender) {
 	        this.appUserService = appUserService;
 	        this.emailValidator = emailValidator;
+			this.confirmationTokenService = confirmationTokenService;
+			this.emailSender = emailSender;
 	    }
     
 	 public String register(RegistrationRequest request) {
@@ -54,7 +60,7 @@ public class RegistrationService {
 
 	    @Transactional
 	    public String confirmToken(String token) {
-	        confirmationToken confirmationToken = confirmationTokenService
+	        ConfirmationToken confirmationToken = confirmationTokenService
 	                .getToken(token)
 	                .orElseThrow(() ->
 	                        new IllegalStateException("token not found"));
