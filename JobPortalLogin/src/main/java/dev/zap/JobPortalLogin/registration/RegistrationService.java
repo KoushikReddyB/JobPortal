@@ -3,6 +3,7 @@ package dev.zap.JobPortalLogin.registration;
 import org.springframework.stereotype.Service;
 
 import dev.zap.JobPortalLogin.appuser.AppUser;
+import dev.zap.JobPortalLogin.appuser.AppUserRole;
 import dev.zap.JobPortalLogin.appuser.AppUserService;
 import lombok.AllArgsConstructor;
 
@@ -31,7 +32,8 @@ public class RegistrationService {
 						request.getFirstName(),
 						request.getLastName(),
 						request.getEmail(),
-						request.getPassword()
+						request.getPassword(),
+						AppUserRole.USER
 						)
 				);
 	}
