@@ -7,20 +7,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.AllArgsConstructor;
-
 @RestController
 @RequestMapping(path = "api/v1/registration")
-@AllArgsConstructor 
 public class RegistrationController {
 
-    private final RegistrationService registrationService;
+    private final RegistrationService registrationService; 
     
-    // Constructor for dependency injection
+    // Manual constructor for dependency injection without AllArgsConstructor
     public RegistrationController(RegistrationService registrationService) {
         this.registrationService = registrationService;
     }
-
 
     @PostMapping
     public String register(@RequestBody RegistrationRequest request) {
@@ -31,5 +27,4 @@ public class RegistrationController {
     public String confirm(@RequestParam String token) {
         return registrationService.confirmToken(token);
     }
-
 }
