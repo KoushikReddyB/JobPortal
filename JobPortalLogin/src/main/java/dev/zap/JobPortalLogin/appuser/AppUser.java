@@ -25,13 +25,13 @@ public class AppUser implements UserDetails {
 	private static final long serialVersionUID = 1L;
 	@Id
     @SequenceGenerator(
-        name = "student_sequence",
-        sequenceName = "student_sequence",
+        name = "client_sequence",
+        sequenceName = "client_sequence",
         allocationSize = 1
     )
     @GeneratedValue(
         strategy = GenerationType.SEQUENCE,
-        generator = "student_sequence"
+        generator = "client_sequence"
     )
     private Long id;
     private String firstName;

@@ -1,6 +1,5 @@
 package dev.zap.JobPortalLogin.security.config;
 
-import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,39 +13,42 @@ import org.springframework.security.web.SecurityFilterChain;
 import dev.zap.JobPortalLogin.appuser.AppUserService;
 
 @Configuration
-@AllArgsConstructor
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-    private final AppUserService appUserService = new AppUserService();
-    private final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+    private final AppUserService appUserService;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @SuppressWarnings({ "removal", "deprecation" })
-	@Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .authorizeRequests()
-                    .requestMatchers("/api/v*/registration/**") // Replaced antMatchers() with requestMatchers()
-                    .permitAll()
-                .anyRequest()
-                .authenticated()
-                .and()
-                .formLogin();
-        return http.build();
+    // Constructor for dependency injection
+    public WebSecurityConfig(AppUserService appUserService, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.appUserService = appUserService;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .csrf().disable() // Disable CSRF protection for development purposes
+                .authorizeHttpRequests() // Modern method to configure authorization
+                    .requestMatchers("/api/v*/registration/**") // Allow public access to registration endpoints
+                    .permitAll()
+                .anyRequest()
+                .authenticated() // Require authentication for any other requests
+                .and()
+                .formLogin(); // Enable form-based login
+        return http.build();
+    }
 
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setPasswordEncoder(bCryptPasswordEncoder);
-        provider.setUserDetailsService(appUserService);
+        provider.setPasswordEncoder(bCryptPasswordEncoder); // Set the password encoder
+        provider.setUserDetailsService(appUserService); // Set the custom user details service
         return provider;
     }
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
-        return config.getAuthenticationManager();
+        return config.getAuthenticationManager(); // Return the authentication manager
     }
 }
