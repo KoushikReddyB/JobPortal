@@ -7,4 +7,8 @@ public class RegistrationService {
 	public String register(RegistrationRequest request) {
 		return "Works!";
 	}
+	public String confirmToken(String token) {
+		return token;
+		
+	}
 }
