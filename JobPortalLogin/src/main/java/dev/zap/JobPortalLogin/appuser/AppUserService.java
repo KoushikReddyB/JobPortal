@@ -1,8 +1,5 @@
 package dev.zap.JobPortalLogin.appuser;
 
-import java.time.LocalDateTime;
-import java.util.UUID;
-
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,15 +9,20 @@ import org.springframework.stereotype.Service;
 import lombok.AllArgsConstructor;
 
 @Service
-@AllArgsConstructor // Lombok automatically handles dependency injection
+@AllArgsConstructor 
 public class AppUserService implements UserDetailsService {
     
     private final static String USER_NOT_FOUND_MSG = "user with email %s not found";
     
     private final AppUserRepository appUserRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final ConfirmationTokenService confirmationTokenService; 
-    
+    // private final ConfirmationTokenService confirmationTokenService; 
+ 
+    // Manual constructor for dependency injection without AllArgsConstructor
+ 	 public AppUserService(AppUserRepository appUserRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+ 	        this.appUserRepository = appUserRepository;
+ 	        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+ 	    }
     @Override
     public UserDetails loadUserByUsername(String email) 
             throws UsernameNotFoundException {
@@ -42,21 +44,10 @@ public class AppUserService implements UserDetailsService {
         String encodedPassword = bCryptPasswordEncoder.encode(appUser.getPassword());
         appUser.setPassword(encodedPassword); 
         appUserRepository.save(appUser);
-
-        String token = UUID.randomUUID().toString();
-
-        // Create a new confirmation token and save it
-        ConfirmationToken confirmationToken = new ConfirmationToken(
-                token,
-                LocalDateTime.now(),
-                LocalDateTime.now().plusMinutes(15),
-                appUser
-        );
-
-        confirmationTokenService.saveConfirmationToken(confirmationToken);
-
-        // TODO: SEND EMAIL
-
-        return token;
+        
+        // TODO: Send 200 token
+        
+        return "YESS! IT WORKS";
+        
     }
 }
