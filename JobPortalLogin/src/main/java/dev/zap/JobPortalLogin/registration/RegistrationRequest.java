@@ -14,6 +14,7 @@ public class RegistrationRequest {
 	private final String firstName = "";
 	private final String lastName = "";
 	private final String email = "";
+	private final String password = "";
 	public String getFirstName() {
 		return firstName;
 	}
@@ -26,5 +27,4 @@ public class RegistrationRequest {
 	public String getPassword() {
 		return password;
 	}
-	private final String password = "";
 }
