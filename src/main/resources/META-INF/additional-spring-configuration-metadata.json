@@ -1,0 +1,22 @@
+{
+  "properties": [
+    {
+      "name": "security.jwt.secret-key",
+      "type": "java.lang.String",
+      "description": "A secret key used to sign JWT tokens. This should be a strong, random value.",
+      "defaultValue": "your_generated_strong_secret_key",
+      "required": true,
+      "example": "Z8Jdk93^@!&7jdKf^d!0Klk#hP93!JdKs",
+      "source": "Environment variable or .env file"
+    },
+    {
+      "name": "security.jwt.expiration-time",
+      "type": "java.lang.Long",
+      "description": "The expiration time for JWT tokens in milliseconds.",
+      "defaultValue": "3600000",
+      "required": false,
+      "example": "3600000 (1 hour)",
+      "source": "Application properties file or environment variable"
+    }
+  ]
+}
